@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,8 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 export const CourseManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
-
-  const courses = [
+  const [courses, setCourses] = useState([
     {
       id: 1,
       title: "React Development",
@@ -52,7 +50,17 @@ export const CourseManagement = () => {
       category: "Database",
       duration: "10 weeks"
     },
-  ];
+  ]);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [newCourse, setNewCourse] = useState({
+    title: '',
+    instructor: '',
+    students: 0,
+    lessons: 0,
+    status: 'active',
+    category: '',
+    duration: ''
+  });
 
   const filteredCourses = courses.filter(course =>
     course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -61,10 +69,30 @@ export const CourseManagement = () => {
   );
 
   const handleDeleteCourse = (courseId: number, courseTitle: string) => {
+    setCourses(courses.filter(c => c.id !== courseId));
     toast({
       title: "Course Deleted",
       description: `"${courseTitle}" has been removed from the system.`,
     });
+  };
+
+  const handleAddCourse = () => {
+    if (!newCourse.title || !newCourse.instructor || !newCourse.category || !newCourse.duration) {
+      toast({ title: "Missing Fields", description: "Please fill all required fields.", variant: "destructive" });
+      return;
+    }
+    setCourses([
+      ...courses,
+      {
+        ...newCourse,
+        id: Date.now(),
+        students: Number(newCourse.students),
+        lessons: Number(newCourse.lessons),
+      },
+    ]);
+    setShowAddModal(false);
+    setNewCourse({ title: '', instructor: '', students: 0, lessons: 0, status: 'active', category: '', duration: '' });
+    toast({ title: "Course Added", description: `"${newCourse.title}" has been added.` });
   };
 
   const getStatusBadgeColor = (status: string) => {
@@ -92,11 +120,32 @@ export const CourseManagement = () => {
           <h1 className="text-3xl font-bold text-gray-900">Course Management</h1>
           <p className="text-gray-600 mt-2">Create and manage learning courses</p>
         </div>
-        <Button>
+        <Button onClick={() => setShowAddModal(true)}>
           <Plus className="w-4 h-4 mr-2" />
           Create New Course
         </Button>
       </div>
+
+      {/* Add Course Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+            <h2 className="text-xl font-bold mb-4">Add New Course</h2>
+            <div className="space-y-3">
+              <Input placeholder="Title" value={newCourse.title} onChange={e => setNewCourse({ ...newCourse, title: e.target.value })} />
+              <Input placeholder="Instructor" value={newCourse.instructor} onChange={e => setNewCourse({ ...newCourse, instructor: e.target.value })} />
+              <Input placeholder="Category" value={newCourse.category} onChange={e => setNewCourse({ ...newCourse, category: e.target.value })} />
+              <Input placeholder="Duration (e.g. 8 weeks)" value={newCourse.duration} onChange={e => setNewCourse({ ...newCourse, duration: e.target.value })} />
+              <Input type="number" placeholder="Lessons" value={newCourse.lessons} onChange={e => setNewCourse({ ...newCourse, lessons: Number(e.target.value) })} />
+              <Input type="number" placeholder="Students" value={newCourse.students} onChange={e => setNewCourse({ ...newCourse, students: Number(e.target.value) })} />
+            </div>
+            <div className="flex justify-end space-x-2 mt-6">
+              <Button variant="outline" onClick={() => setShowAddModal(false)}>Cancel</Button>
+              <Button onClick={handleAddCourse}>Add Course</Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Card>
         <CardHeader>

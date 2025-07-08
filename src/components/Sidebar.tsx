@@ -1,7 +1,7 @@
-
 import { NavLink } from "react-router-dom";
-import { Book, Users, Video, FileAudio, User, BookOpen, FileText } from "lucide-react";
+import { Book, Video, FileAudio, BookOpen, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,7 +9,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ isOpen }: SidebarProps) => {
-  const isAdmin = true; // This would come from auth context in real app
+  const { role } = useAuth();
 
   const studentLinks = [
     { to: "/", icon: BookOpen, label: "Dashboard" },
@@ -18,12 +18,12 @@ export const Sidebar = ({ isOpen }: SidebarProps) => {
   ];
 
   const adminLinks = [
-    { to: "/admin", icon: User, label: "Admin Dashboard" },
-    { to: "/admin/users", icon: Users, label: "Manage Users" },
+    { to: "/admin", icon: BookOpen, label: "Admin Dashboard" },
+    { to: "/admin/users", icon: Book, label: "Manage Users" },
     { to: "/admin/courses", icon: Book, label: "Manage Courses" },
   ];
 
-  const links = isAdmin ? [...studentLinks, ...adminLinks] : studentLinks;
+  const links = role === "admin" ? adminLinks : studentLinks;
 
   return (
     <div className={cn(

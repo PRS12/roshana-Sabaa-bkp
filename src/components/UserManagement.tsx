@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,14 +9,21 @@ import { useToast } from "@/hooks/use-toast";
 export const UserManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
-
-  const users = [
+  const [users, setUsers] = useState([
     { id: 1, name: "John Doe", email: "john@example.com", role: "student", status: "active", courses: 3 },
     { id: 2, name: "Jane Smith", email: "jane@example.com", role: "instructor", status: "active", courses: 5 },
     { id: 3, name: "Mike Johnson", email: "mike@example.com", role: "student", status: "inactive", courses: 1 },
     { id: 4, name: "Sarah Wilson", email: "sarah@example.com", role: "admin", status: "active", courses: 0 },
     { id: 5, name: "Tom Brown", email: "tom@example.com", role: "student", status: "active", courses: 2 },
-  ];
+  ]);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    role: 'student',
+    status: 'active',
+    courses: 0
+  });
 
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -25,13 +31,33 @@ export const UserManagement = () => {
   );
 
   const handleDeleteUser = (userId: number, userName: string) => {
+    setUsers(users.filter(u => u.id !== userId));
     toast({
       title: "User Deleted",
       description: `${userName} has been removed from the system.`,
     });
   };
 
+  const handleAddUser = () => {
+    if (!newUser.name || !newUser.email) {
+      toast({ title: "Missing Fields", description: "Please fill all required fields.", variant: "destructive" });
+      return;
+    }
+    setUsers([
+      ...users,
+      {
+        ...newUser,
+        id: Date.now(),
+        courses: Number(newUser.courses),
+      },
+    ]);
+    setShowAddModal(false);
+    setNewUser({ name: '', email: '', role: 'student', status: 'active', courses: 0 });
+    toast({ title: "User Added", description: `"${newUser.name}" has been added.` });
+  };
+
   const handleToggleStatus = (userId: number, userName: string, currentStatus: string) => {
+    setUsers(users.map(u => u.id === userId ? { ...u, status: currentStatus === 'active' ? 'inactive' : 'active' } : u));
     const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
     toast({
       title: "Status Updated",
@@ -59,12 +85,37 @@ export const UserManagement = () => {
           <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
           <p className="text-gray-600 mt-2">Manage students, instructors, and administrators</p>
         </div>
-        <Button>
+        <Button onClick={() => setShowAddModal(true)}>
           <Plus className="w-4 h-4 mr-2" />
           Add New User
         </Button>
       </div>
-
+      {/* Add User Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+            <h2 className="text-xl font-bold mb-4">Add New User</h2>
+            <div className="space-y-3">
+              <Input placeholder="Name" value={newUser.name} onChange={e => setNewUser({ ...newUser, name: e.target.value })} />
+              <Input placeholder="Email" value={newUser.email} onChange={e => setNewUser({ ...newUser, email: e.target.value })} />
+              <select className="w-full border rounded px-3 py-2" value={newUser.role} onChange={e => setNewUser({ ...newUser, role: e.target.value })}>
+                <option value="student">Student</option>
+                <option value="instructor">Instructor</option>
+                <option value="admin">Admin</option>
+              </select>
+              <select className="w-full border rounded px-3 py-2" value={newUser.status} onChange={e => setNewUser({ ...newUser, status: e.target.value })}>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+              <Input type="number" placeholder="Courses" value={newUser.courses} onChange={e => setNewUser({ ...newUser, courses: Number(e.target.value) })} />
+            </div>
+            <div className="flex justify-end space-x-2 mt-6">
+              <Button variant="outline" onClick={() => setShowAddModal(false)}>Cancel</Button>
+              <Button onClick={handleAddUser}>Add User</Button>
+            </div>
+          </div>
+        </div>
+      )}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">

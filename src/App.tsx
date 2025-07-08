@@ -1,10 +1,9 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthPage } from "./components/AuthPage";
 import { Layout } from "./components/Layout";
@@ -18,30 +17,46 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const AppRoutes = () => {
+  const { role, loading } = useAuth();
+
+  if (loading) return null; // Or a loader
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/" element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }>
+          {/* Student routes */}
+          {role === "student" && <> 
+            <Route path="courses" element={<CourseContent />} />
+            <Route path="assignments" element={<AssignmentSubmission />} />
+          </>}
+          {/* Admin routes */}
+          {role === "admin" && <> 
+            <Route path="admin/users" element={<UserManagement />} />
+            <Route path="admin/courses" element={<CourseManagement />} />
+          </>}
+          {/* Common dashboard for both */}
+          <Route index element={<Dashboard />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Layout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<Dashboard />} />
-              <Route path="courses" element={<CourseContent />} />
-              <Route path="assignments" element={<AssignmentSubmission />} />
-              <Route path="admin" element={<AdminDashboard />} />
-              <Route path="admin/users" element={<UserManagement />} />
-              <Route path="admin/courses" element={<CourseManagement />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <AppRoutes />
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
