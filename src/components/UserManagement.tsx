@@ -9,13 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 export const UserManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
-  const [users, setUsers] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com", role: "student", status: "active", courses: 3 },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "instructor", status: "active", courses: 5 },
-    { id: 3, name: "Mike Johnson", email: "mike@example.com", role: "student", status: "inactive", courses: 1 },
-    { id: 4, name: "Sarah Wilson", email: "sarah@example.com", role: "admin", status: "active", courses: 0 },
-    { id: 5, name: "Tom Brown", email: "tom@example.com", role: "student", status: "active", courses: 2 },
-  ]);
+  const [users, setUsers] = useState([]); // No default users
   const [showAddModal, setShowAddModal] = useState(false);
   const [newUser, setNewUser] = useState({
     name: '',

@@ -1,10 +1,9 @@
-
 -- Create a profiles table to store additional user information
 CREATE TABLE public.profiles (
   id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
   email TEXT,
   full_name TEXT,
-  role TEXT DEFAULT 'student' CHECK (role IN ('student', 'admin')),
+  role TEXT CHECK (role IN ('student', 'admin')),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

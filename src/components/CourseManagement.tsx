@@ -9,48 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 export const CourseManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
-  const [courses, setCourses] = useState([
-    {
-      id: 1,
-      title: "React Development",
-      instructor: "John Doe",
-      students: 45,
-      lessons: 12,
-      status: "active",
-      category: "Programming",
-      duration: "8 weeks"
-    },
-    {
-      id: 2,
-      title: "JavaScript Fundamentals",
-      instructor: "Jane Smith",
-      students: 67,
-      lessons: 15,
-      status: "active",
-      category: "Programming",
-      duration: "6 weeks"
-    },
-    {
-      id: 3,
-      title: "UI/UX Design Principles",
-      instructor: "Mike Johnson",
-      students: 23,
-      lessons: 10,
-      status: "draft",
-      category: "Design",
-      duration: "4 weeks"
-    },
-    {
-      id: 4,
-      title: "Database Management",
-      instructor: "Sarah Wilson",
-      students: 34,
-      lessons: 18,
-      status: "active",
-      category: "Database",
-      duration: "10 weeks"
-    },
-  ]);
+  const [courses, setCourses] = useState([]); // No default courses
   const [showAddModal, setShowAddModal] = useState(false);
   const [newCourse, setNewCourse] = useState({
     title: '',
@@ -117,8 +76,8 @@ export const CourseManagement = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Course Management</h1>
-          <p className="text-gray-600 mt-2">Create and manage learning courses</p>
+          <h1 className="text-3xl font-bold text-gray-900">Taleem-Dekhter Course Management</h1>
+          <p className="text-gray-600 mt-2">Create and manage learning courses on Taleem-Dekhter</p>
         </div>
         <Button onClick={() => setShowAddModal(true)}>
           <Plus className="w-4 h-4 mr-2" />
