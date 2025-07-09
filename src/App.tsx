@@ -14,6 +14,7 @@ import { AdminDashboard } from "./components/AdminDashboard";
 import { UserManagement } from "./components/UserManagement";
 import { CourseManagement } from "./components/CourseManagement";
 import NotFound from "./pages/NotFound";
+import { LandingPage } from "./pages/LandingPage";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/" element={
           <ProtectedRoute>
@@ -38,6 +40,7 @@ const AppRoutes = () => {
           </>}
           {/* Admin routes */}
           {role === "admin" && <> 
+            <Route path="admin" element={<AdminDashboard />} />
             <Route path="admin/users" element={<UserManagement />} />
             <Route path="admin/courses" element={<CourseManagement />} />
           </>}

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Users, Search, Plus, Edit, Trash, UserCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 export const UserManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,17 +33,34 @@ export const UserManagement = () => {
     });
   };
 
-  const handleAddUser = () => {
+  // Save user to Supabase user_management table
+  const addUserToSupabase = async (user) => {
+    const { error } = await supabase.from("user_management").insert([user]);
+    return error;
+  };
+
+  const handleAddUser = async () => {
     if (!newUser.name || !newUser.email) {
       toast({ title: "Missing Fields", description: "Please fill all required fields.", variant: "destructive" });
+      return;
+    }
+    const userToAdd = {
+      name: newUser.name,
+      email: newUser.email,
+      role: newUser.role,
+      status: newUser.status,
+      courses: Number(newUser.courses),
+    };
+    const error = await addUserToSupabase(userToAdd);
+    if (error) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
       return;
     }
     setUsers([
       ...users,
       {
-        ...newUser,
-        id: Date.now(),
-        courses: Number(newUser.courses),
+        ...userToAdd,
+        id: Date.now(), // Local id for UI only
       },
     ]);
     setShowAddModal(false);

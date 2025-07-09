@@ -35,7 +35,7 @@ export const Sidebar = ({ isOpen }: SidebarProps) => {
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <BookOpen className="w-5 h-5 text-white" />
           </div>
-          {isOpen && <h1 className="text-xl font-bold text-gray-800">Taleem-Dekhter</h1>}
+          {isOpen && <h1 className="text-xl font-bold text-gray-800">Taleem-Dekhteer</h1>}
         </div>
       </div>
       

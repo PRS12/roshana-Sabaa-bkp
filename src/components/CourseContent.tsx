@@ -1,58 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Video, FileAudio, FileText, Play, Download, Book } from "lucide-react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 
 export const CourseContent = () => {
-  // Example course data with modules and content
-  const courses = [
-    {
-      id: 1,
-      name: "React Development",
-      modules: [
-        {
-          id: 1,
-          name: "Introduction",
-          contents: [
-            { id: 1, title: "Welcome Video", type: "video", duration: "05:00", description: "Welcome to React!", url: "https://www.youtube.com/watch?v=Dce12tIG2zc" },
-            { id: 2, title: "Intro Audio", type: "audio", duration: "03:00", description: "Audio overview.", url: "#" },
-            { id: 3, title: "Intro Guide", type: "pdf", pages: 10, description: "PDF intro.", url: "#" },
-          ]
-        },
-        {
-          id: 2,
-          name: "Hooks",
-          contents: [
-            { id: 4, title: "Hooks Video", type: "video", duration: "08:30", description: "Hooks explained.", url: "#" },
-            { id: 5, title: "Hooks Audio", type: "audio", duration: "04:00", description: "Hooks audio.", url: "#" },
-            { id: 6, title: "Hooks PDF", type: "pdf", pages: 12, description: "Hooks PDF.", url: "#" },
-          ]
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: "UI/UX Design",
-      modules: [
-        {
-          id: 1,
-          name: "Design Basics",
-          contents: [
-            { id: 7, title: "Design Video", type: "video", duration: "06:00", description: "Design basics.", url: "#" },
-            { id: 8, title: "Design Audio", type: "audio", duration: "02:30", description: "Design audio.", url: "#" },
-            { id: 9, title: "Design PDF", type: "pdf", pages: 8, description: "Design PDF.", url: "#" },
-          ]
-        }
-      ]
-    }
-  ];
-
-  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(courses[0]?.id || null);
-  const selectedCourse = courses.find(c => c.id === selectedCourseId);
-  const [selectedModuleId, setSelectedModuleId] = useState<number | null>(selectedCourse?.modules[0]?.id || null);
-  const selectedModule = selectedCourse?.modules.find(m => m.id === selectedModuleId);
+  const [courses, setCourses] = useState<any[]>([]);
+  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
+  const [selectedModuleId, setSelectedModuleId] = useState<number | null>(null);
   const [selectedContent, setSelectedContent] = useState<any>(null);
+
+  // Fetch course content from JSON file
+  useEffect(() => {
+    fetch("/course-content.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setCourses(data);
+        setSelectedCourseId(data[0]?.id || null);
+        setSelectedModuleId(data[0]?.modules[0]?.id || null);
+      });
+  }, []);
+
+  const selectedCourse = courses.find((c) => c.id === selectedCourseId);
+  const selectedModule = selectedCourse?.modules.find((m: any) => m.id === selectedModuleId);
 
   // Update module when course changes
   const handleCourseChange = (id: string) => {
