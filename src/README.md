@@ -1,4 +1,4 @@
-# Welcome to your Taleem-Dekhteerproject
+# Welcome to your Roshana-Sabaaproject
 
 ## Project info
 
@@ -10,9 +10,9 @@ There are several ways of editing your application.
 
 **Use Lovable**
 
-Simply visit the [Taleem-DekhteerProject](https://lovable.dev/projects/1aff8c29-a56d-4d46-a5c4-34b31ee2ffa1) and start prompting.
+Simply visit the [Roshana-SabaaProject](https://lovable.dev/projects/1aff8c29-a56d-4d46-a5c4-34b31ee2ffa1) and start prompting.
 
-Changes made via Taleem-Dekhteerwill be committed automatically to this repo.
+Changes made via Roshana-Sabaawill be committed automatically to this repo.
 
 **Use your preferred IDE**
 
@@ -64,7 +64,7 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/1aff8c29-a56d-4d46-a5c4-34b31ee2ffa1) and click on Share -> Publish.
 
-## Can I connect a custom domain to my Taleem-Dekhteerproject?
+## Can I connect a custom domain to my Roshana-Sabaaproject?
 
 Yes, you can!
 

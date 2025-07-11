@@ -20,8 +20,8 @@ export const AdminDashboard = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Taleem-Dekhteer Admin Dashboard</h1>
-          <p className="text-gray-600 mt-2">Manage your Taleem-Dekhteer learning management system</p>
+          <h1 className="text-3xl font-bold text-gray-900">Roshana-Sabaa Admin Dashboard</h1>
+          <p className="text-gray-600 mt-2">Manage your Roshana-Sabaa learning management system</p>
         </div>
         <div className="flex space-x-3">
           <Button>

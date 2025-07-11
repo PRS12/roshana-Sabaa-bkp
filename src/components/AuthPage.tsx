@@ -60,7 +60,7 @@ export const AuthPage = () => {
       {/* Top Navigation Bar */}
       <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-4 px-4 bg-white rounded-2xl shadow mb-10">
         <div className="flex items-center gap-5">
-          <span className="font-bold text-xl text-gray-700 tracking-tight">Taleem-Dekhteer</span>
+          <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
         </div>
         <div className="flex items-center gap-4">
           <Button variant="ghost" className="text-gray-500" onClick={() => setIsLogin(false)}>Sign up</Button>

@@ -6,7 +6,7 @@ export const LandingPage = () => {
       {/* Top Navigation Bar */}
       <div className="w-full max-w-6xl mx-auto flex items-center justify-between py-6 px-8 bg-white rounded-2xl shadow mb-8">
         <div className="flex items-center gap-4">
-          <span className="font-bold text-xl text-gray-700 tracking-tight">Taleem-Dekhteer</span>
+          <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
           <div className="flex items-center gap-2 ml-8">
             <span className="text-gray-500 font-medium">Categories</span>
             <span className="text-gray-400">▼</span>
