@@ -28,23 +28,18 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/" element={
+        <Route element={
           <ProtectedRoute>
             <Layout />
           </ProtectedRoute>
         }>
-          {/* Student routes */}
-          {role === "student" && <> 
-            <Route path="courses" element={<CourseContent />} />
-            <Route path="assignments" element={<AssignmentSubmission />} />
-          </>}
-          {/* Admin routes */}
-          {role === "admin" && <> 
-            <Route path="admin" element={<AdminDashboard />} />
-            <Route path="admin/users" element={<UserManagement />} />
-            <Route path="admin/courses" element={<CourseManagement />} />
-          </>}
-          {/* Common dashboard for both */}
+          <Route path="courses" element={<CourseContent />} />
+          <Route path="assignments" element={<AssignmentSubmission />} />
+          <Route path="admin">
+            <Route index element={<AdminDashboard />} />
+            <Route path="users" element={<UserManagement />} />
+            <Route path="courses" element={<CourseManagement />} />
+          </Route>
           <Route index element={<Dashboard />} />
         </Route>
         <Route path="*" element={<NotFound />} />

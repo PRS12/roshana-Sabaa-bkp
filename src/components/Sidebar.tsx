@@ -23,7 +23,8 @@ export const Sidebar = ({ isOpen }: SidebarProps) => {
     { to: "/admin/courses", icon: Book, label: "Manage Courses" },
   ];
 
-  const links = role === "admin" ? adminLinks : studentLinks;
+  // Use student links for any non-admin (case-insensitive)
+  const links = role && role.toLowerCase() === "admin" ? adminLinks : studentLinks;
 
   return (
     <div className={cn(

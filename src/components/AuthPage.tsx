@@ -58,8 +58,8 @@ export const AuthPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
       {/* Top Navigation Bar */}
-      <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-7 px-9 bg-white rounded-2xl shadow mb-8">
-        <div className="flex items-center gap-4">
+      <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-4 px-4 bg-white rounded-2xl shadow mb-10">
+        <div className="flex items-center gap-5">
           <span className="font-bold text-xl text-gray-700 tracking-tight">Taleem-Dekhteer</span>
         </div>
         <div className="flex items-center gap-4">
@@ -77,7 +77,7 @@ export const AuthPage = () => {
               <span className="text-green-600">LIMITS</span>
             </h1>
             <p className="text-lg text-gray-600 mb-8">
-              Join our online community and learn from professionals.
+              Join our online community.
             </p>
             <div className="flex gap-12 text-center mb-8">
               <div>
