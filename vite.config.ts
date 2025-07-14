@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   preview: {
-    host: "taleem-dekhter.org",
+    host: "roshana-sabaa.org",
     port: 8080
   },
   plugins: [

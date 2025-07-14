@@ -76,8 +76,8 @@ export const CourseManagement = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Taleem-Dekhter Course Management</h1>
-          <p className="text-gray-600 mt-2">Create and manage learning courses on Taleem-Dekhter</p>
+          <h1 className="text-3xl font-bold text-gray-900">Roshana-Sabaa Course Management</h1>
+          <p className="text-gray-600 mt-2">Create and manage learning courses on Roshana-Sabaa</p>
         </div>
         <Button onClick={() => setShowAddModal(true)}>
           <Plus className="w-4 h-4 mr-2" />
