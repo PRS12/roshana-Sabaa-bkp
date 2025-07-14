@@ -70,23 +70,20 @@ export const AuthPage = () => {
   const handleCreateAccount = () => setIsLogin(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center px-4 overflow-y-auto relative">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center px-2 sm:px-4 overflow-y-auto relative">
       {/* Flag at the extreme right above the navigation bar */}
-      <div style={{ position: 'absolute', top: 24, right: 32, zIndex: 50 }}>
+      <div style={{ position: 'absolute', top: 16, right: 16, zIndex: 50 }}>
         <img
           src="/flag.png"
           alt="Flag"
-          style={{ width: 56, height: 36, objectFit: 'cover', borderRadius: 6, border: '2px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+          style={{ width: 40, height: 28, objectFit: 'cover', borderRadius: 6, border: '2px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
         />
       </div>
       {/* Top Navigation Bar (added at the very top) */}
-      <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-4 px-4 bg-white rounded-2xl shadow mb-10 mt-4">
-        <div className="flex items-center gap-5">
-          <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
+      <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-3 px-2 sm:px-4 bg-white rounded-2xl shadow mb-6 mt-3">
+        <div className="flex items-center gap-3 sm:gap-5">
+          <span className="font-bold text-lg sm:text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
         </div>
-        {/* <div className="flex items-center gap-4">
-          <Button variant="ghost" className="text-gray-500" onClick={() => setIsLogin(false)}>Sign up</Button>
-        </div> */}
       </div>
       {/* Site-wide full-page watermark */}
       <div className="fixed inset-0 z-0 pointer-events-none select-none">
@@ -97,18 +94,19 @@ export const AuthPage = () => {
           style={{ filter: 'grayscale(100%) blur(2px)' }}
         />
       </div>
-      {/* Vision Statement Section - left-aligned, wide (60% of screen), single line between paragraphs, with classroom image on the right */}
-      <div className="w-full flex flex-row justify-start items-stretch mt-10 z-10 gap-8">
+      {/* Vision Statement Section - responsive for mobile */}
+      <div className="w-full flex flex-col md:flex-row justify-start items-stretch mt-6 sm:mt-10 z-10 gap-4 sm:gap-8">
+        {/* Vision text */}
         <div
           ref={visionRef}
-          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-14 transition-opacity duration-1000 flex flex-col items-start h-full ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          style={{ width: '60vw', minWidth: '600px', maxWidth: '1100px', height: '100%' }}
+          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-10 md:p-14 transition-opacity duration-1000 flex flex-col items-start h-full ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ width: '100%', maxWidth: '1100px', minWidth: 0, flex: 1 }}
         >
           <div className="z-10 w-full">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-centre text-green-700 mb-4 leading-tight">Roshana Sabaa</h1>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-left text-green-700 mb-4 leading-tight">Cloud Based Education Model</h2>
-            <h3 className="text-2xl font-bold text-left text-gray-800 mb-6">An Initiative by Ambassador Farid Mamundzay</h3>
-            <div className="text-gray-700 text-base md:text-lg leading-9 tracking-wider space-y-4 text-left">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-centre text-green-700 mb-2 sm:mb-4 leading-tight">Roshana Sabaa</h1>
+            <h2 className="text-xl sm:text-4xl md:text-5xl font-extrabold text-left text-green-700 mb-2 sm:mb-4 leading-tight">Cloud Based Education Model</h2>
+            <h3 className="text-lg sm:text-2xl font-bold text-left text-gray-800 mb-3 sm:mb-6">An Initiative by Ambassador Farid Mamundzay</h3>
+            <div className="text-gray-700 text-sm sm:text-base md:text-lg leading-7 sm:leading-9 tracking-wider space-y-2 sm:space-y-4 text-left">
               <p>Education empowers us with a vision to create opportunities for all—transforming lives, economies, and societies. It enables every individual to live a life of purpose and actively contribute to global growth and development. This vision strengthens our ability to respond to emerging challenges and ensures we address the needs and aspirations of future generations.</p>
               <p>As an Afghan Ambassador, I felt a profound sense of collective purpose and responsibility in actively supporting and advancing education for Afghan refugees. </p>
               <p>I have drawn deep inspiration from my experience as a lecturer at the American University of Afghanistan, where I served in the Faculty of Business and strived to broaden educational horizons and empowered young minds.</p>
@@ -120,90 +118,73 @@ export const AuthPage = () => {
             </div>
           </div>
         </div>
-        {/* Classroom image on the right */}
+        {/* Classroom image on the right, stacks below on mobile */}
         <div
-          ref={visionRef}
-          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-14 transition-opacity duration-1000 flex flex-col items-start h-full ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          style={{ width: '60vw', minWidth: '600px', maxWidth: '1100px', height: '100%', flex: 1 }}
+          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-10 md:p-14 transition-opacity duration-1000 flex flex-col items-start h-full ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ width: '100%', maxWidth: '1100px', minWidth: 0, flex: 1 }}
         >
           <img
             src="/classroom_new.png"
             alt="Afghan classroom"
-            className="rounded-2xl border border-gray-300 w-full h-full"
-            style={{ background: '#fff', objectFit: 'fill', height: '100%' }}
+            className="rounded-2xl border border-gray-300 w-full h-48 sm:h-80 md:h-full object-cover"
+            style={{ background: '#fff', objectFit: 'cover', height: '100%' }}
             onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', "<div class='text-gray-400 text-center mt-4'>Classroom image not found. Please add <b>classroom_new.png</b> to the public folder.</div>"); }}
           />
         </div>
       </div>
 
-      {/* Main Content (Landing + Auth) below Vision Statement, starts from 3/4th of the page */}
-      <div className="w-full flex flex-col items-center justify-center mt-32">
-        {/* Top Navigation Bar */}
-        <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-4 px-4 bg-white rounded-2xl shadow mb-10">
-          <div className="flex items-center gap-5">
-            <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
-          </div>
-          <div className="flex items-center">
-            <img
-              src="/flag.png"
-              alt="Flag"
-              style={{ width: 56, height: 36, objectFit: 'cover', borderRadius: 6, border: '2px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
-            />
-          </div>
-          {/* <div className="flex items-center gap-4">
-            <Button variant="ghost" className="text-gray-500" onClick={() => setIsLogin(false)}>Sign up</Button>
-          </div> */}
-        </div>
+      {/* Main Content (Landing + Auth) below Vision Statement, responsive for mobile */}
+      <div className="w-full flex flex-col items-center justify-center mt-16 sm:mt-32">
         {/* Main Content */}
-        <div className="max-w-7xl w-full bg-white rounded-2xl shadow-xl p-10 flex flex-col md:flex-row items-center gap-16">
+        <div className="max-w-7xl w-full bg-white rounded-2xl shadow-xl p-4 sm:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-16">
           {/* Left Section: Headline, Stats, Info Cards */}
-          <div className="flex-1 flex flex-col gap-8">
+          <div className="flex-1 flex flex-col gap-6 sm:gap-8 w-full">
             <div>
-              <h1 className="text-7xl font-extrabold text-gray-900 leading-tight mb-6">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight mb-4 sm:mb-6">
                 LEARNING <br />
                 <span className="text-green-600">WITHOUT</span> <br />
                 <span className="text-green-600">LIMITS</span>
               </h1>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-8">
                 Join our online community.
               </p>
-              <div className="flex gap-12 text-center mb-8">
+              <div className="flex gap-6 sm:gap-12 text-center mb-4 sm:mb-8">
                 <div>
-                  <p className="text-2xl font-bold text-green-600">95%</p>
+                  <p className="text-lg sm:text-2xl font-bold text-green-600">95%</p>
                   <p className="text-xs text-gray-500">student approval</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-green-600">+120</p>
+                  <p className="text-lg sm:text-2xl font-bold text-green-600">+120</p>
                   <p className="text-xs text-gray-500">online courses</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-green-600">+20</p>
+                  <p className="text-lg sm:text-2xl font-bold text-green-600">+20</p>
                   <p className="text-xs text-gray-500">categories</p>
                 </div>
               </div>
             </div>
             {/* Info Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white rounded-xl shadow p-6 flex flex-col justify-center items-start border border-gray-100 min-h-[120px]">
-                <h3 className="font-semibold text-lg mb-2">Popular Courses</h3>
-                <p className="text-gray-500 text-sm">Explore the most popular courses among our students</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-white rounded-xl shadow p-4 sm:p-6 flex flex-col justify-center items-start border border-gray-100 min-h-[80px] sm:min-h-[120px]">
+                <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">Popular Courses</h3>
+                <p className="text-gray-500 text-xs sm:text-sm">Explore the most popular courses among our students</p>
               </div>
-              <div className="bg-white rounded-xl shadow p-6 flex flex-col justify-center items-start border border-gray-100 min-h-[120px]">
-                <h3 className="font-semibold text-lg mb-2">New Courses</h3>
-                <p className="text-gray-500 text-sm">Explore the new courses on our platform</p>
+              <div className="bg-white rounded-xl shadow p-4 sm:p-6 flex flex-col justify-center items-start border border-gray-100 min-h-[80px] sm:min-h-[120px]">
+                <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">New Courses</h3>
+                <p className="text-gray-500 text-xs sm:text-sm">Explore the new courses on our platform</p>
               </div>
             </div>
           </div>
           {/* Right Section: Auth Form */}
           <div className="flex-1 flex flex-col items-center justify-center w-full max-w-md">
-            <div className="w-full bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-              <h2 className="text-2xl font-bold text-center mb-2">{isLogin ? 'Sign In' : 'Create Account'}</h2>
-              <p className="text-center text-gray-500 mb-6">
+            <div className="w-full bg-white rounded-2xl shadow-lg p-4 sm:p-8 border border-gray-100">
+              <h2 className="text-xl sm:text-2xl font-bold text-center mb-2">{isLogin ? 'Sign In' : 'Create Account'}</h2>
+              <p className="text-center text-gray-500 mb-4 sm:mb-6">
                 {isLogin ? 'Sign in to access your learning dashboard' : 'Join our learning management system'}
               </p>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                 {!isLogin && (
-                  <div className="space-y-2">
+                  <div className="space-y-1 sm:space-y-2">
                     <Label htmlFor="fullName">Full Name</Label>
                     <Input
                       id="fullName"
@@ -215,7 +196,7 @@ export const AuthPage = () => {
                     />
                   </div>
                 )}
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
@@ -226,7 +207,7 @@ export const AuthPage = () => {
                     required
                   />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   <Label htmlFor="password">Password</Label>
                   <Input
                     id="password"
@@ -243,30 +224,28 @@ export const AuthPage = () => {
                   {isLogin ? 'Sign In' : 'Create Account'}
                 </Button>
               </form>
-              <div className="mt-6 text-center">
+              <div className="mt-4 sm:mt-6 text-center">
                 <button
                   type="button"
                   onClick={() => setIsLogin(!isLogin)}
                   className="text-sm text-blue-600 hover:underline"
                 >
                   {isLogin ? "Don't have an account? Create one" : "Already have an account? Sign in"}
-
                 </button>
               </div>
             </div>
           </div>
         </div>
-
       </div>
       {/* Footer with blog and other links */}
-      <div className="w-full flex flex-col items-center justify-center mt-40 bg-black py-16">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          <a href="#" className="text-white text-2xl font-bold hover:underline">Blog</a>
-          <a href="#" className="text-white text-2xl font-bold hover:underline">About</a>
-          <a href="#" className="text-white text-2xl font-bold hover:underline">Contact</a>
-          <a href="#" className="text-white text-2xl font-bold hover:underline">Help</a>
+      <div className="w-full flex flex-col items-center justify-center mt-20 sm:mt-40 bg-black py-8 sm:py-16">
+        <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-12">
+          <a href="#" className="text-white text-lg sm:text-2xl font-bold hover:underline">Blog</a>
+          <a href="#" className="text-white text-lg sm:text-2xl font-bold hover:underline">About</a>
+          <a href="#" className="text-white text-lg sm:text-2xl font-bold hover:underline">Contact</a>
+          <a href="#" className="text-white text-lg sm:text-2xl font-bold hover:underline">Help</a>
         </div>
-        <div className="text-gray-400 text-lg mt-8">&copy; {`${new Date().getFullYear()} Roshana-Sabaa. All rights reserved.`}</div>
+        <div className="text-gray-400 text-sm sm:text-lg mt-4 sm:mt-8">&copy; {`${new Date().getFullYear()} Roshana-Sabaa. All rights reserved.`}</div>
       </div>
     </div>
   );

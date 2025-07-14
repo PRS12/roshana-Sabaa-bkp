@@ -73,13 +73,13 @@ export const CourseManagement = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 px-2 md:px-0 w-full max-w-7xl mx-auto overflow-x-hidden">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Roshana-Sabaa Course Management</h1>
-          <p className="text-gray-600 mt-2">Create and manage learning courses on Roshana-Sabaa</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Roshana-Sabaa Course Management</h1>
+          <p className="text-gray-600 mt-2 text-base md:text-lg">Create and manage learning courses on Roshana-Sabaa</p>
         </div>
-        <Button onClick={() => setShowAddModal(true)}>
+        <Button onClick={() => setShowAddModal(true)} className="w-full md:w-auto">
           <Plus className="w-4 h-4 mr-2" />
           Create New Course
         </Button>
@@ -106,33 +106,33 @@ export const CourseManagement = () => {
         </div>
       )}
 
-      <Card>
+      <Card className="overflow-x-auto">
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
+            <CardTitle className="flex items-center text-lg md:text-xl">
               <Book className="w-5 h-5 mr-2" />
               All Courses ({filteredCourses.length})
             </CardTitle>
-            <div className="relative w-64">
+            <div className="relative w-full md:w-64">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
                 placeholder="Search courses..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-10 w-full"
               />
             </div>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 overflow-x-auto">
             {filteredCourses.map((course) => (
-              <Card key={course.id} className="hover:shadow-md transition-shadow">
+              <Card key={course.id} className="hover:shadow-md transition-shadow min-w-[320px]">
                 <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div className="flex-1">
-                      <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="text-xl font-semibold text-gray-900">{course.title}</h3>
+                      <div className="flex flex-wrap items-center space-x-3 mb-2">
+                        <h3 className="text-lg md:text-xl font-semibold text-gray-900">{course.title}</h3>
                         <Badge className={getStatusBadgeColor(course.status)}>
                           {course.status}
                         </Badge>
@@ -140,9 +140,7 @@ export const CourseManagement = () => {
                           {course.category}
                         </Badge>
                       </div>
-                      
                       <p className="text-gray-600 mb-4">Instructor: {course.instructor}</p>
-                      
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="flex items-center text-sm text-gray-600">
                           <Users className="w-4 h-4 mr-2" />
@@ -158,8 +156,7 @@ export const CourseManagement = () => {
                         </div>
                       </div>
                     </div>
-                    
-                    <div className="flex items-center space-x-2 ml-4">
+                    <div className="flex items-center space-x-2 md:ml-4">
                       <Button variant="outline" size="sm">
                         <Edit className="w-4 h-4" />
                       </Button>
@@ -179,7 +176,7 @@ export const CourseManagement = () => {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <Card>
           <CardContent className="p-6 text-center">
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
