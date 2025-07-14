@@ -71,6 +71,15 @@ export const AuthPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center px-4 overflow-y-auto relative">
+      {/* Top Navigation Bar (added at the very top) */}
+      <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-4 px-4 bg-white rounded-2xl shadow mb-10 mt-4">
+        <div className="flex items-center gap-5">
+          <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
+        </div>
+        {/* <div className="flex items-center gap-4">
+          <Button variant="ghost" className="text-gray-500" onClick={() => setIsLogin(false)}>Sign up</Button>
+        </div> */}
+      </div>
       {/* Site-wide full-page watermark */}
       <div className="fixed inset-0 z-0 pointer-events-none select-none">
         <img
@@ -219,6 +228,17 @@ export const AuthPage = () => {
             </div>
           </div>
         </div>
+
+      </div>
+      {/* Footer with blog and other links */}
+      <div className="w-full flex flex-col items-center justify-center mt-40 bg-black py-16">
+        <div className="flex flex-col md:flex-row items-center gap-12">
+          <a href="#" className="text-white text-2xl font-bold hover:underline">Blog</a>
+          <a href="#" className="text-white text-2xl font-bold hover:underline">About</a>
+          <a href="#" className="text-white text-2xl font-bold hover:underline">Contact</a>
+          <a href="#" className="text-white text-2xl font-bold hover:underline">Help</a>
+        </div>
+        <div className="text-gray-400 text-lg mt-8">&copy; {`${new Date().getFullYear()} Roshana-Sabaa. All rights reserved.`}</div>
       </div>
     </div>
   );
