@@ -95,16 +95,16 @@ export const AuthPage = () => {
         />
       </div>
       {/* Vision Statement Section - responsive for mobile */}
-      <div className="w-full flex flex-col md:flex-row justify-start items-stretch mt-6 sm:mt-10 z-10 gap-4 sm:gap-8">
+      <div className="w-full flex flex-col md:flex-row justify-start items-stretch mt-6 sm:mt-10 z-10 gap-4 sm:gap-8 min-h-[400px] md:min-h-[500px]">
         {/* Vision text */}
         <div
           ref={visionRef}
-          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-10 md:p-14 transition-opacity duration-1000 flex flex-col items-start h-full ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          style={{ width: '100%', maxWidth: '1100px', minWidth: 0, flex: 1 }}
+          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-10 md:p-14 transition-opacity duration-1000 flex flex-col items-start h-full min-h-[400px] md:min-h-[500px] ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ width: '100%', maxWidth: '1400px', minWidth: 0, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'stretch', height: '100%' }}
         >
           <div className="z-10 w-full">
             <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-centre text-green-700 mb-2 sm:mb-4 leading-tight">Roshana Sabaa</h1>
-            <h2 className="text-xl sm:text-4xl md:text-5xl font-extrabold text-left text-green-700 mb-2 sm:mb-4 leading-tight">Cloud Based Education Model</h2>
+            <h2 className="text-xl sm:text-4xl md:text-5xl font-extrabold text-left text-green-700 mb-2 sm:mb-4 leading-tight">Cloud-Based Education Model</h2>
             <h3 className="text-lg sm:text-2xl font-bold text-left text-gray-800 mb-3 sm:mb-6">An Initiative by Ambassador Farid Mamundzay</h3>
             <div className="text-gray-700 text-sm sm:text-base md:text-lg leading-7 sm:leading-9 tracking-wider space-y-2 sm:space-y-4 text-left">
               <p>Education empowers us with a vision to create opportunities for all—transforming lives, economies, and societies. It enables every individual to live a life of purpose and actively contribute to global growth and development. This vision strengthens our ability to respond to emerging challenges and ensures we address the needs and aspirations of future generations.</p>
@@ -120,16 +120,18 @@ export const AuthPage = () => {
         </div>
         {/* Classroom image on the right, stacks below on mobile */}
         <div
-          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-10 md:p-14 transition-opacity duration-1000 flex flex-col items-start h-full ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          style={{ width: '100%', maxWidth: '1100px', minWidth: 0, flex: 1 }}
+          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-10 md:p-14 transition-opacity duration-1000 flex flex-col items-start h-full min-h-[400px] md:min-h-[500px] ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ width: '100%', maxWidth: '1400px', minWidth: 0, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'stretch', height: '100%' }}
         >
-          <img
-            src="/classroom_new.png"
-            alt="Afghan classroom"
-            className="rounded-2xl border border-gray-300 w-full h-48 sm:h-80 md:h-full object-cover"
-            style={{ background: '#fff', objectFit: 'cover', height: '100%' }}
-            onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', "<div class='text-gray-400 text-center mt-4'>Classroom image not found. Please add <b>classroom_new.png</b> to the public folder.</div>"); }}
-          />
+          <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '700px' }}>
+            <img
+              src="/classroom_new.png"
+              alt="Afghan classroom"
+              className="rounded-2xl border border-gray-700 w-full h-full object-cover"
+              style={{ background: '#fff', objectFit: 'cover', width: '100%', height: '100%', minHeight: '925px' }}
+              onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', "<div class='text-gray-700 text-center mt-4'>Classroom image not found. Please add <b>classroom_new.png</b> to the public folder.</div>"); }}
+            />
+          </div>
         </div>
       </div>
 
@@ -142,37 +144,12 @@ export const AuthPage = () => {
             <div>
               <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight mb-4 sm:mb-6">
                 LEARNING <br />
-                <span className="text-green-600">WITHOUT</span> <br />
-                <span className="text-green-600">LIMITS</span>
+                <span className="text-green-600">BEYOND</span> <br />
+                <span className="text-green-600">BORDERS</span>
               </h1>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-8">
-                Join our online community.
+                Be part of our online community.
               </p>
-              <div className="flex gap-6 sm:gap-12 text-center mb-4 sm:mb-8">
-                <div>
-                  <p className="text-lg sm:text-2xl font-bold text-green-600">95%</p>
-                  <p className="text-xs text-gray-500">student approval</p>
-                </div>
-                <div>
-                  <p className="text-lg sm:text-2xl font-bold text-green-600">+120</p>
-                  <p className="text-xs text-gray-500">online courses</p>
-                </div>
-                <div>
-                  <p className="text-lg sm:text-2xl font-bold text-green-600">+20</p>
-                  <p className="text-xs text-gray-500">categories</p>
-                </div>
-              </div>
-            </div>
-            {/* Info Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white rounded-xl shadow p-4 sm:p-6 flex flex-col justify-center items-start border border-gray-100 min-h-[80px] sm:min-h-[120px]">
-                <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">Popular Courses</h3>
-                <p className="text-gray-500 text-xs sm:text-sm">Explore the most popular courses among our students</p>
-              </div>
-              <div className="bg-white rounded-xl shadow p-4 sm:p-6 flex flex-col justify-center items-start border border-gray-100 min-h-[80px] sm:min-h-[120px]">
-                <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">New Courses</h3>
-                <p className="text-gray-500 text-xs sm:text-sm">Explore the new courses on our platform</p>
-              </div>
             </div>
           </div>
           {/* Right Section: Auth Form */}
