@@ -51,10 +51,10 @@ export const AuthPage = () => {
           toast({ title: 'Welcome back!', description: 'You have been successfully logged in.' });
         }
       } else {
-        const { error } = await signUp(email, password, fullName);
+          alt="Afghan classroom"
         if (error) {
           toast({ title: 'Signup Failed', description: error.message, variant: 'destructive' });
-        } else {
+          onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', '<div class=\'text-gray-400 text-center mt-4\'>Classroom image not found. Please add <b>classroom_new.png</b> to the public folder.</div>'); }}
           toast({ title: 'Account Created!', description: 'Please check your email to verify your account.' });
         }
       }
@@ -138,7 +138,7 @@ export const AuthPage = () => {
             alt="Afghan classroom"
             className="rounded-2xl border border-gray-300 w-full h-full"
             style={{ background: '#fff', objectFit: 'fill', height: '100%' }}
-            onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', '<div class=\'text-gray-400 text-center mt-4\'>Classroom image not found. Please add <b>image1.png</b> to the public folder.</div>'); }}
+            onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', "<div class='text-gray-400 text-center mt-4'>Classroom image not found. Please add <b>classroom_new.png</b> to the public folder.</div>"); }}
           />
         </div>
       </div>
