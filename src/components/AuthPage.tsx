@@ -84,13 +84,6 @@ export const AuthPage = () => {
         <div className="flex items-center gap-5">
           <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
         </div>
-        <div className="flex items-center">
-          <img
-            src="/flag.png"
-            alt="Flag"
-            style={{ width: 56, height: 36, objectFit: 'cover', borderRadius: 6, border: '2px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
-          />
-        </div>
         {/* <div className="flex items-center gap-4">
           <Button variant="ghost" className="text-gray-500" onClick={() => setIsLogin(false)}>Sign up</Button>
         </div> */}
