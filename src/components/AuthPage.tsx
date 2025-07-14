@@ -51,10 +51,10 @@ export const AuthPage = () => {
           toast({ title: 'Welcome back!', description: 'You have been successfully logged in.' });
         }
       } else {
-          alt="Afghan classroom"
+        const { error } = await signUp(email, password, fullName);
         if (error) {
           toast({ title: 'Signup Failed', description: error.message, variant: 'destructive' });
-          onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', '<div class=\'text-gray-400 text-center mt-4\'>Classroom image not found. Please add <b>classroom_new.png</b> to the public folder.</div>'); }}
+        } else {
           toast({ title: 'Account Created!', description: 'Please check your email to verify your account.' });
         }
       }
