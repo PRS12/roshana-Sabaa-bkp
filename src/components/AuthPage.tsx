@@ -71,10 +71,25 @@ export const AuthPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center px-4 overflow-y-auto relative">
+      {/* Flag at the extreme right above the navigation bar */}
+      <div style={{ position: 'absolute', top: 24, right: 32, zIndex: 50 }}>
+        <img
+          src="/flag.png"
+          alt="Flag"
+          style={{ width: 56, height: 36, objectFit: 'cover', borderRadius: 6, border: '2px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+        />
+      </div>
       {/* Top Navigation Bar (added at the very top) */}
       <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-4 px-4 bg-white rounded-2xl shadow mb-10 mt-4">
         <div className="flex items-center gap-5">
           <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
+        </div>
+        <div className="flex items-center">
+          <img
+            src="/flag.png"
+            alt="Flag"
+            style={{ width: 56, height: 36, objectFit: 'cover', borderRadius: 6, border: '2px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+          />
         </div>
         {/* <div className="flex items-center gap-4">
           <Button variant="ghost" className="text-gray-500" onClick={() => setIsLogin(false)}>Sign up</Button>
@@ -89,29 +104,42 @@ export const AuthPage = () => {
           style={{ filter: 'grayscale(100%) blur(2px)' }}
         />
       </div>
-      {/* Vision Statement Section - left-aligned, wide (60% of screen), single line between paragraphs */}
-      <div className="w-full flex justify-start mt-10 z-10">
+      {/* Vision Statement Section - left-aligned, wide (60% of screen), single line between paragraphs, with classroom image on the right */}
+      <div className="w-full flex flex-row justify-start items-stretch mt-10 z-10 gap-8">
         <div
           ref={visionRef}
-          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-14 transition-opacity duration-1000 flex flex-col items-start ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          style={{ width: '60vw', minWidth: '600px', maxWidth: '1100px' }}
+          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-14 transition-opacity duration-1000 flex flex-col items-start h-full ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ width: '60vw', minWidth: '600px', maxWidth: '1100px', height: '100%' }}
         >
           <div className="z-10 w-full">
             <h1 className="text-4xl md:text-5xl font-extrabold text-centre text-green-700 mb-4 leading-tight">Roshana Sabaa</h1>
             <h2 className="text-4xl md:text-5xl font-extrabold text-left text-green-700 mb-4 leading-tight">Cloud Based Education Model</h2>
-            <h3 className="text-2xl font-bold text-left text-gray-800 mb-6">An Initiative by Dr. Farid Mamundzay</h3>
+            <h3 className="text-2xl font-bold text-left text-gray-800 mb-6">An Initiative by Ambassador Farid Mamundzay</h3>
             <div className="text-gray-700 text-base md:text-lg leading-9 tracking-wider space-y-4 text-left">
               <p>Education empowers us with a vision to create opportunities for all—transforming lives, economies, and societies. It enables every individual to live a life of purpose and actively contribute to global growth and development. This vision strengthens our ability to respond to emerging challenges and ensures we address the needs and aspirations of future generations.</p>
-              <p>As an Afghan Ambassador, I felt a profound sense of collective purpose and responsibility in actively supporting and advancing education for Afghan refugees.</p>
+              <p>As an Afghan Ambassador, I felt a profound sense of collective purpose and responsibility in actively supporting and advancing education for Afghan refugees. </p>
               <p>I have drawn deep inspiration from my experience as a lecturer at the American University of Afghanistan, where I served in the Faculty of Business and strived to broaden educational horizons and empowered young minds.</p>
               <p>In my role as an ambassador, I actively championed educational progress for the greater good by facilitating scholarships and building partnerships with universities in India to support Afghan students. One of our proudest achievements was the reopening of the Syed Jamaluddin School—the only school for Afghan refugees in New Delhi.</p>
               <p>Placing a greater focus on education, we shine a light on a startling reality: an estimated 8.9 million children in Afghanistan—among them 888,000 with disabilities and 2.2 million girls—are out of school and urgently need educational emergency support.</p>
               <p>To ensure greater access to education for Afghan refugees, we aim to forge partnerships with a diverse set of stakeholders to support their lifelong learning, enabling them to heal and rebuild their lives.</p>
               <p>To turn our vision into reality, we are launching a cloud-based education program designed to provide meaningful support and reach the doorstep of every Afghan child.</p>
-              <p>Therefore, I urge our collaborating partners, including Enactus, to support the online education program for Afghan refugees and internally displaced persons, and to join us in this vital education initiative. This partnership represents a transformative step in responding to Afghanistan’s ongoing crisis—ensuring continuity in education for Afghan children, even in the most challenging times.</p>
-              <p>I urge our partners to prioritize education as a central pillar in public policies and investments. Together, our collective efforts can transform this vision into concrete actions that foster inclusive, supportive learning environments for Afghan refugees—especially women and girls—regardless of where they live.</p>
+              <p>This Initiative represents a transformative step in responding to Afghanistan’s ongoing crisis—ensuring continuity in education for Afghan children, even in the most challenging times.</p>
             </div>
           </div>
+        </div>
+        {/* Classroom image on the right */}
+        <div
+          ref={visionRef}
+          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-14 transition-opacity duration-1000 flex flex-col items-start h-full ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ width: '60vw', minWidth: '600px', maxWidth: '1100px', height: '100%', flex: 1 }}
+        >
+          <img
+            src="/classroom_new.png"
+            alt="Afghan classroom"
+            className="rounded-2xl border border-gray-300 w-full h-full"
+            style={{ background: '#fff', objectFit: 'fill', height: '100%' }}
+            onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', '<div class=\'text-gray-400 text-center mt-4\'>Classroom image not found. Please add <b>image1.png</b> to the public folder.</div>'); }}
+          />
         </div>
       </div>
 
@@ -121,6 +149,13 @@ export const AuthPage = () => {
         <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-4 px-4 bg-white rounded-2xl shadow mb-10">
           <div className="flex items-center gap-5">
             <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
+          </div>
+          <div className="flex items-center">
+            <img
+              src="/flag.png"
+              alt="Flag"
+              style={{ width: 56, height: 36, objectFit: 'cover', borderRadius: 6, border: '2px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+            />
           </div>
           {/* <div className="flex items-center gap-4">
             <Button variant="ghost" className="text-gray-500" onClick={() => setIsLogin(false)}>Sign up</Button>
