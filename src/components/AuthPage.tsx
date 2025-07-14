@@ -70,16 +70,6 @@ export const AuthPage = () => {
   const handleCreateAccount = () => setIsLogin(false);
 
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
-      {/* Top Navigation Bar */}
-      <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-4 px-4 bg-white rounded-2xl shadow mb-10">
-        <div className="flex items-center gap-5">
-          <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" className="text-gray-500" onClick={() => setIsLogin(false)}>Sign up</Button>
-=======
     <div className="min-h-screen bg-gray-50 flex flex-col items-center px-4 overflow-y-auto relative">
       {/* Site-wide full-page watermark */}
       <div className="fixed inset-0 z-0 pointer-events-none select-none">
@@ -98,6 +88,7 @@ export const AuthPage = () => {
           style={{ width: '60vw', minWidth: '600px', maxWidth: '1100px' }}
         >
           <div className="z-10 w-full">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-centre text-green-700 mb-4 leading-tight">Roshana Sabaa</h1>
             <h2 className="text-4xl md:text-5xl font-extrabold text-left text-green-700 mb-4 leading-tight">Cloud Based Education Model</h2>
             <h3 className="text-2xl font-bold text-left text-gray-800 mb-6">An Initiative by Dr. Farid Mamundzay</h3>
             <div className="text-gray-700 text-base md:text-lg leading-9 tracking-wider space-y-4 text-left">
@@ -112,7 +103,6 @@ export const AuthPage = () => {
               <p>I urge our partners to prioritize education as a central pillar in public policies and investments. Together, our collective efforts can transform this vision into concrete actions that foster inclusive, supportive learning environments for Afghan refugees—especially women and girls—regardless of where they live.</p>
             </div>
           </div>
->>>>>>> 757c07c (Update AuthPage: vision statement box, full-page watermark, and layout improvements)
         </div>
       </div>
 
@@ -123,9 +113,9 @@ export const AuthPage = () => {
           <div className="flex items-center gap-5">
             <span className="font-bold text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
           </div>
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <Button variant="ghost" className="text-gray-500" onClick={() => setIsLogin(false)}>Sign up</Button>
-          </div>
+          </div> */}
         </div>
         {/* Main Content */}
         <div className="max-w-7xl w-full bg-white rounded-2xl shadow-xl p-10 flex flex-col md:flex-row items-center gap-16">
@@ -223,6 +213,7 @@ export const AuthPage = () => {
                   className="text-sm text-blue-600 hover:underline"
                 >
                   {isLogin ? "Don't have an account? Create one" : "Already have an account? Sign in"}
+
                 </button>
               </div>
             </div>
