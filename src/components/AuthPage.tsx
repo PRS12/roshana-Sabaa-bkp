@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/carousel";
 
 // Array of images for the slideshow
+// changed the UI commemnt to reflect the current images
+// Array of images for the slideshow updated to include classroom images
 const SLIDESHOW_IMAGES = [
   {
     src: "/Main_image.jpg",
