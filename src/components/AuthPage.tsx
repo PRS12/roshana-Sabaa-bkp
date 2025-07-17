@@ -21,10 +21,10 @@ const SLIDESHOW_IMAGES = [
     src: "/Main_image.jpg",
     alt: "Afghan classroom"
   },
-  {
-    src: "/classroom_new.png",
-    alt: "Afghan classroom"
-  },
+  // {
+  //   src: "/classroom_new.png",
+  //   alt: "Afghan classroom"
+  // },
   {
     src: "/classroom2.jpg",
     alt: "Students learning"
