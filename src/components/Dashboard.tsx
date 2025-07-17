@@ -1,11 +1,10 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Book, Video, FileAudio, FileText, Calendar, TrendingUp } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
-  const navigate = useNavigate();
   const recentCourses = [
     { id: 1, title: "React Development", progress: 75, instructor: "John Doe" },
     { id: 2, title: "JavaScript Fundamentals", progress: 90, instructor: "Jane Smith" },
@@ -94,7 +93,7 @@ export const Dashboard = () => {
                       <Progress value={course.progress} className="mt-1" />
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" className="ml-4" onClick={() => navigate(`/courses?courseId=${course.id}`)}>
+                  <Button variant="outline" size="sm" className="ml-4">
                     Continue
                   </Button>
                 </div>

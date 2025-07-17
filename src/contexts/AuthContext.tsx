@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -6,7 +7,6 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  role: string | null; // Add role
   signUp: (email: string, password: string, fullName?: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
@@ -30,7 +30,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
-  const [role, setRole] = useState<string | null>(null); // Add role state
 
   useEffect(() => {
     // Set up auth state listener
@@ -39,7 +38,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
-        if (session?.user) fetchUserRole(session.user.id); // Fetch role
       }
     );
 
@@ -48,22 +46,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
-      if (session?.user) fetchUserRole(session.user.id); // Fetch role
     });
 
     return () => subscription.unsubscribe();
   }, []);
-
-  // Fetch user role from profiles table
-  const fetchUserRole = async (userId: string) => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', userId)
-      .single();
-    if (!error && data) setRole(data.role);
-    else setRole(null);
-  };
 
   const signUp = async (email: string, password: string, fullName?: string) => {
     const redirectUrl = `${window.location.origin}/`;
@@ -97,7 +83,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     user,
     session,
     loading,
-    role, // Provide role
     signUp,
     signIn,
     signOut,

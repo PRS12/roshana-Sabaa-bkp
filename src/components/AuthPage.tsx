@@ -6,6 +6,35 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { Loader2 } from 'lucide-react';
+import Autoplay from 'embla-carousel-autoplay';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+// Array of images for the slideshow
+const SLIDESHOW_IMAGES = [
+  {
+    src: "/Main_image.jpg",
+    alt: "Afghan classroom"
+  },
+  {
+    src: "/classroom_new.png",
+    alt: "Afghan classroom"
+  },
+  {
+    src: "/classroom2.jpg",
+    alt: "Students learning"
+  },
+  {
+    src: "/classroom3.jpg",
+    alt: "Interactive learning"
+  }
+  // Add more images as needed
+];
 
 export const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -72,15 +101,15 @@ export const AuthPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center px-2 sm:px-4 overflow-y-auto relative">
       {/* Flag at the extreme right above the navigation bar */}
-      <div style={{ position: 'absolute', top: 16, right: 16, zIndex: 50 }}>
+      <div className="fixed top-2 sm:top-4 right-2 sm:right-4 z-50">
         <img
           src="/flag.png"
           alt="Flag"
-          style={{ width: 40, height: 28, objectFit: 'cover', borderRadius: 6, border: '2px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+          className="w-8 h-6 sm:w-10 sm:h-7 object-cover rounded-md sm:rounded-lg border-2 border-gray-200 shadow-md transition-transform hover:scale-105"
         />
       </div>
       {/* Top Navigation Bar (added at the very top) */}
-      <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-3 px-2 sm:px-4 bg-white rounded-2xl shadow mb-6 mt-3">
+      <div className="w-full max-w-8xl mx-auto flex items-center justify-between py-2 sm:py-3 px-3 sm:px-4 bg-white rounded-xl sm:rounded-2xl shadow mb-4 sm:mb-6 mt-2 sm:mt-3">
         <div className="flex items-center gap-3 sm:gap-5">
           <span className="font-bold text-lg sm:text-xl text-gray-700 tracking-tight">Roshana-Sabaa</span>
         </div>
@@ -95,18 +124,18 @@ export const AuthPage = () => {
         />
       </div>
       {/* Vision Statement Section - responsive for mobile */}
-      <div className="w-full flex flex-col md:flex-row justify-start items-stretch mt-6 sm:mt-10 z-10 gap-4 sm:gap-8 min-h-[400px] md:min-h-[500px]">
+      <div className="w-full flex flex-col md:flex-row justify-start items-stretch mt-4 sm:mt-6 md:mt-10 z-10 gap-4 sm:gap-6 md:gap-8">
         {/* Vision text */}
         <div
           ref={visionRef}
-          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-10 md:p-14 transition-opacity duration-1000 flex flex-col items-start h-full min-h-[400px] md:min-h-[500px] ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          style={{ width: '100%', maxWidth: '1400px', minWidth: 0, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'stretch', height: '100%' }}
+          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-8 md:p-14 transition-opacity duration-1000 flex flex-col items-start h-full min-h-[auto] md:min-h-[500px] w-full ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ flex: 1, minWidth: 0 }}
         >
           <div className="z-10 w-full">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-centre text-green-700 mb-2 sm:mb-4 leading-tight">Roshana Sabaa</h1>
-            <h2 className="text-xl sm:text-4xl md:text-5xl font-extrabold text-left text-green-700 mb-2 sm:mb-4 leading-tight">Cloud-Based Education Model</h2>
-            <h3 className="text-lg sm:text-2xl font-bold text-left text-gray-800 mb-3 sm:mb-6">An Initiative by Ambassador Farid Mamundzay</h3>
-            <div className="text-gray-700 text-sm sm:text-base md:text-lg leading-7 sm:leading-9 tracking-wider space-y-2 sm:space-y-4 text-left">
+            <h1 className="text-xl sm:text-3xl md:text-5xl font-extrabold text-center sm:text-left text-green-700 mb-2 sm:mb-4 leading-tight">Roshana Sabaa</h1>
+            <h2 className="text-lg sm:text-2xl md:text-4xl font-extrabold text-center sm:text-left text-green-700 mb-2 sm:mb-4 leading-tight">Cloud-Based Education Model</h2>
+            <h3 className="text-base sm:text-xl md:text-2xl font-bold text-center sm:text-left text-gray-800 mb-3 sm:mb-6">An Initiative by Ambassador Farid Mamundzay</h3>
+            <div className="text-gray-700 text-sm sm:text-base md:text-lg leading-6 sm:leading-7 md:leading-8 tracking-wide sm:tracking-wider space-y-2 sm:space-y-3 md:space-y-4 text-left">
               <p>Education empowers us with a vision to create opportunities for all—transforming lives, economies, and societies. It enables every individual to live a life of purpose and actively contribute to global growth and development. This vision strengthens our ability to respond to emerging challenges and ensures we address the needs and aspirations of future generations.</p>
               <p>As an Afghan Ambassador, I felt a profound sense of collective purpose and responsibility in actively supporting and advancing education for Afghan refugees. </p>
               <p>I have drawn deep inspiration from my experience as a lecturer at the American University of Afghanistan, where I served in the Faculty of Business and strived to broaden educational horizons and empowered young minds.</p>
@@ -118,42 +147,80 @@ export const AuthPage = () => {
             </div>
           </div>
         </div>
-        {/* Classroom image on the right, stacks below on mobile */}
+        {/* Classroom slideshow on the right, stacks below on mobile */}
         <div
-          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-10 md:p-14 transition-opacity duration-1000 flex flex-col items-start h-full min-h-[400px] md:min-h-[500px] ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          style={{ width: '100%', maxWidth: '1400px', minWidth: 0, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'stretch', height: '100%' }}
+          className={`relative bg-white rounded-2xl border border-green-600 shadow-2xl p-4 sm:p-8 transition-opacity duration-1000 flex flex-col items-center justify-center ${visionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ width: '100%', maxWidth: '800px', minWidth: 0, flex: 1 }}
         >
-          <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '700px' }}>
-            <img
-              src="/classroom_new.png"
-              alt="Afghan classroom"
-              className="rounded-2xl border border-gray-700 w-full h-full object-cover"
-              style={{ background: '#fff', objectFit: 'cover', width: '100%', height: '100%', minHeight: '925px' }}
-              onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', "<div class='text-gray-700 text-center mt-4'>Classroom image not found. Please add <b>classroom_new.png</b> to the public folder.</div>"); }}
-            />
-          </div>
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+              skipSnaps: false,
+              containScroll: "trimSnaps",
+            }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true
+              })
+            ]}
+            className="w-full max-w-[700px] mx-auto animate-in fade-in zoom-in duration-1000"
+          >
+            <CarouselContent className="h-full">
+              {SLIDESHOW_IMAGES.map((image, index) => (
+                <CarouselItem key={index} className="h-full transition-transform duration-500 ease-in-out transform hover:scale-[1.02]">
+                  <div className="relative w-full aspect-square transition-all duration-500">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="rounded-2xl border border-gray-700 w-full h-full object-cover"
+                      style={{ 
+                        background: '#fff', 
+                        objectFit: 'cover',
+                        width: '700px',
+                        height: '700px',
+                        maxWidth: '100%',
+                        margin: '0 auto'
+                      }}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.parentElement.insertAdjacentHTML(
+                          'beforeend',
+                          `<div class='text-gray-700 text-center mt-4'>Image not found. Please add <b>${image.src.substring(1)}</b> to the public folder.</div>`
+                        );
+                      }}
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 transition-transform duration-300 hover:scale-110 bg-white/80 hover:bg-white" />
+            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 transition-transform duration-300 hover:scale-110 bg-white/80 hover:bg-white" />
+          </Carousel>
         </div>
       </div>
 
       {/* Main Content (Landing + Auth) below Vision Statement, responsive for mobile */}
-      <div className="w-full flex flex-col items-center justify-center mt-16 sm:mt-32">
+      <div className="w-full flex flex-col items-center justify-center mt-8 sm:mt-16 md:mt-32">
         {/* Main Content */}
-        <div className="max-w-7xl w-full bg-white rounded-2xl shadow-xl p-4 sm:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-16">
+        <div className="max-w-7xl w-full bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-8 md:p-10 flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-16">
           {/* Left Section: Headline, Stats, Info Cards */}
-          <div className="flex-1 flex flex-col gap-6 sm:gap-8 w-full">
+          <div className="flex-1 flex flex-col gap-4 sm:gap-6 md:gap-8 w-full">
             <div>
-              <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight mb-4 sm:mb-6">
+              <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-center md:text-left text-gray-900 leading-tight mb-3 sm:mb-4 md:mb-6">
                 LEARNING <br />
                 <span className="text-green-600">BEYOND</span> <br />
                 <span className="text-green-600">BORDERS</span>
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-8">
+              <p className="text-sm sm:text-base md:text-lg text-center md:text-left text-gray-600 mb-3 sm:mb-4 md:mb-8">
                 Be part of our online community.
               </p>
             </div>
           </div>
           {/* Right Section: Auth Form */}
-          <div className="flex-1 flex flex-col items-center justify-center w-full max-w-md">
+          <div className="flex-1 flex flex-col items-center justify-center w-full max-w-sm sm:max-w-md">
             <div className="w-full bg-white rounded-2xl shadow-lg p-4 sm:p-8 border border-gray-100">
               <h2 className="text-xl sm:text-2xl font-bold text-center mb-2">{isLogin ? 'Sign In' : 'Create Account'}</h2>
               <p className="text-center text-gray-500 mb-4 sm:mb-6">
@@ -215,14 +282,14 @@ export const AuthPage = () => {
         </div>
       </div>
       {/* Footer with blog and other links */}
-      <div className="w-full flex flex-col items-center justify-center mt-20 sm:mt-40 bg-black py-8 sm:py-16">
-        <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-12">
-          <a href="#" className="text-white text-lg sm:text-2xl font-bold hover:underline">Blog</a>
-          <a href="#" className="text-white text-lg sm:text-2xl font-bold hover:underline">About</a>
-          <a href="#" className="text-white text-lg sm:text-2xl font-bold hover:underline">Contact</a>
-          <a href="#" className="text-white text-lg sm:text-2xl font-bold hover:underline">Help</a>
+      <div className="w-full flex flex-col items-center justify-center mt-12 sm:mt-20 md:mt-40 bg-black py-6 sm:py-8 md:py-16">
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 md:gap-12">
+          <a href="#" className="text-white text-base sm:text-lg md:text-2xl font-bold hover:underline transition-colors duration-200 hover:text-green-400">Blog</a>
+          <a href="#" className="text-white text-base sm:text-lg md:text-2xl font-bold hover:underline transition-colors duration-200 hover:text-green-400">About</a>
+          <a href="#" className="text-white text-base sm:text-lg md:text-2xl font-bold hover:underline transition-colors duration-200 hover:text-green-400">Contact</a>
+          <a href="#" className="text-white text-base sm:text-lg md:text-2xl font-bold hover:underline transition-colors duration-200 hover:text-green-400">Help</a>
         </div>
-        <div className="text-gray-400 text-sm sm:text-lg mt-4 sm:mt-8">&copy; {`${new Date().getFullYear()} Roshana-Sabaa. All rights reserved.`}</div>
+        <div className="text-gray-400 text-xs sm:text-sm md:text-lg mt-4 sm:mt-6 md:mt-8 px-4 text-center">&copy; {`${new Date().getFullYear()} Roshana-Sabaa. All rights reserved.`}</div>
       </div>
     </div>
   );

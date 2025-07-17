@@ -1,86 +1,64 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Video, FileAudio, FileText, Play, Download, Book } from "lucide-react";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const CourseContent = () => {
-  const [courses, setCourses] = useState<any[]>([]);
-  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
-  const [selectedModuleId, setSelectedModuleId] = useState<number | null>(null);
   const [selectedContent, setSelectedContent] = useState<any>(null);
 
-  // Fetch course content from JSON file
-  useEffect(() => {
-    fetch("/course-content.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setCourses(data);
-        setSelectedCourseId(data[0]?.id || null);
-        setSelectedModuleId(data[0]?.modules[0]?.id || null);
-      });
-  }, []);
+  const contentItems = [
+    {
+      id: 1,
+      title: "Basic Simplification for Kids",
+      type: "video",
+      duration: "08:30",
+      description: "Basic Simplification problem for Kids",
+      url: "https://www.youtube.com/watch?v=Dce12tIG2zc"
+    },
+    {
+      id: 2,
+      title: "React Hooks Explained",
+      type: "audio",
+      duration: "12:45",
+      description: "Understanding useState and useEffect hooks",
+      url: "#"
+    },
+    {
+      id: 3,
+      title: "React Best Practices Guide",
+      type: "pdf",
+      pages: 25,
+      description: "Comprehensive guide to React development patterns",
+      url: "#"
+    },
+  ];
 
-  const selectedCourse = courses.find((c) => c.id === selectedCourseId);
-  const selectedModule = selectedCourse?.modules.find((m: any) => m.id === selectedModuleId);
-
-  // Update module when course changes
-  const handleCourseChange = (id: string) => {
-    setSelectedCourseId(Number(id));
-    const course = courses.find(c => c.id === Number(id));
-    setSelectedModuleId(course?.modules[0]?.id || null);
-    setSelectedContent(null);
-  };
-
-  // Update content when module changes
-  const handleModuleChange = (id: string) => {
-    setSelectedModuleId(Number(id));
-    setSelectedContent(null);
+  const getIcon = (type: string) => {
+    switch (type) {
+      case 'video': return <Video className="w-5 h-5 text-blue-600" />;
+      case 'audio': return <FileAudio className="w-5 h-5 text-green-600" />;
+      case 'pdf': return <FileText className="w-5 h-5 text-red-600" />;
+      default: return <FileText className="w-5 h-5" />;
+    }
   };
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Student Portal</h1>
-        <p className="text-gray-600 mt-2">Browse your courses and modules</p>
+        <h1 className="text-3xl font-bold text-gray-900">React Development Course</h1>
+        <p className="text-gray-600 mt-2">Master React from fundamentals to advanced concepts</p>
       </div>
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="w-full md:w-1/3">
-          <label className="block mb-1 font-medium">Select Course</label>
-          <Select value={selectedCourseId?.toString()} onValueChange={handleCourseChange}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a course" />
-            </SelectTrigger>
-            <SelectContent>
-              {courses.map(course => (
-                <SelectItem key={course.id} value={course.id.toString()}>{course.name}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="w-full md:w-1/3">
-          <label className="block mb-1 font-medium">Select Module</label>
-          <Select value={selectedModuleId?.toString()} onValueChange={handleModuleChange}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a module" />
-            </SelectTrigger>
-            <SelectContent>
-              {selectedCourse?.modules.map(module => (
-                <SelectItem key={module.id} value={module.id.toString()}>{module.name}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
           <Card>
             <CardHeader>
-              <CardTitle>Module Content</CardTitle>
+              <CardTitle>Course Content</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                {selectedModule?.contents.map((item) => (
+                {contentItems.map((item) => (
                   <div
                     key={item.id}
                     className={`p-3 rounded-lg cursor-pointer transition-colors ${
@@ -89,6 +67,7 @@ export const CourseContent = () => {
                     onClick={() => setSelectedContent(item)}
                   >
                     <div className="flex items-center space-x-3">
+                      {getIcon(item.type)}
                       <div className="flex-1">
                         <h3 className="font-medium text-gray-900">{item.title}</h3>
                         <p className="text-sm text-gray-600">
@@ -105,6 +84,7 @@ export const CourseContent = () => {
             </CardContent>
           </Card>
         </div>
+
         <div className="lg:col-span-2">
           <Card className="h-full">
             <CardContent className="p-6">
@@ -117,39 +97,42 @@ export const CourseContent = () => {
                       Download
                     </Button>
                   </div>
+                  
                   <p className="text-gray-600">{selectedContent.description}</p>
+
                   <div className="bg-gray-100 rounded-lg p-8 flex items-center justify-center min-h-[400px]">
                     {selectedContent.type === 'video' && (
                       <div className="w-full">
                         <div className="aspect-video bg-black rounded-lg flex items-center justify-center">
-                          <video controls className="w-full h-full rounded-lg">
-                            <source src={selectedContent.url} type="video/mp4" />
-                            Your browser does not support the video tag.
-                          </video>
+                          <div className="text-center text-white">
+                            <Video className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                            <p>Video Player</p>
+                            <p className="text-sm opacity-75">Duration: {selectedContent.duration}</p>
+                          </div>
                         </div>
                       </div>
                     )}
+                    
                     {selectedContent.type === 'audio' && (
                       <div className="text-center">
                         <FileAudio className="w-16 h-16 mx-auto mb-4 text-green-600" />
                         <p className="text-lg font-medium">Audio Content</p>
                         <p className="text-gray-600">Duration: {selectedContent.duration}</p>
-                        <audio controls className="mt-4 w-full">
-                          <source src={selectedContent.url} type="audio/mpeg" />
-                          Your browser does not support the audio element.
-                        </audio>
+                        <Button className="mt-4">
+                          <Play className="w-4 h-4 mr-2" />
+                          Play Audio
+                        </Button>
                       </div>
                     )}
+                    
                     {selectedContent.type === 'pdf' && (
                       <div className="text-center">
                         <FileText className="w-16 h-16 mx-auto mb-4 text-red-600" />
                         <p className="text-lg font-medium">PDF Document</p>
                         <p className="text-gray-600">{selectedContent.pages} pages</p>
-                        <Button className="mt-4" asChild>
-                          <a href={selectedContent.url} target="_blank" rel="noopener noreferrer">
-                            <FileText className="w-4 h-4 mr-2" />
-                            Open PDF
-                          </a>
+                        <Button className="mt-4">
+                          <FileText className="w-4 h-4 mr-2" />
+                          Open PDF
                         </Button>
                       </div>
                     )}
@@ -160,7 +143,7 @@ export const CourseContent = () => {
                   <div className="text-center">
                     <Book className="w-16 h-16 mx-auto mb-4 opacity-50" />
                     <p className="text-lg">Select content to view</p>
-                    <p className="text-sm">Choose from the module content list</p>
+                    <p className="text-sm">Choose from the course content list</p>
                   </div>
                 </div>
               )}

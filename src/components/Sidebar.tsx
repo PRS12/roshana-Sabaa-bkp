@@ -1,7 +1,7 @@
+
 import { NavLink } from "react-router-dom";
-import { Book, Video, FileAudio, BookOpen, FileText } from "lucide-react";
+import { Book, Users, Video, FileAudio, User, BookOpen, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/contexts/AuthContext";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,7 +9,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ isOpen }: SidebarProps) => {
-  const { role } = useAuth();
+  const isAdmin = true; // This would come from auth context in real app
 
   const studentLinks = [
     { to: "/", icon: BookOpen, label: "Dashboard" },
@@ -18,13 +18,12 @@ export const Sidebar = ({ isOpen }: SidebarProps) => {
   ];
 
   const adminLinks = [
-    { to: "/admin", icon: BookOpen, label: "Admin Dashboard" },
-    { to: "/admin/users", icon: Book, label: "Manage Users" },
+    { to: "/admin", icon: User, label: "Admin Dashboard" },
+    { to: "/admin/users", icon: Users, label: "Manage Users" },
     { to: "/admin/courses", icon: Book, label: "Manage Courses" },
   ];
 
-  // Use student links for any non-admin (case-insensitive)
-  const links = role && role.toLowerCase() === "admin" ? adminLinks : studentLinks;
+  const links = isAdmin ? [...studentLinks, ...adminLinks] : studentLinks;
 
   return (
     <div className={cn(
@@ -36,7 +35,7 @@ export const Sidebar = ({ isOpen }: SidebarProps) => {
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <BookOpen className="w-5 h-5 text-white" />
           </div>
-          {isOpen && <h1 className="text-xl font-bold text-gray-800">Roshana-Sabaa</h1>}
+          {isOpen && <h1 className="text-xl font-bold text-gray-800">EduPlatform</h1>}
         </div>
       </div>
       

@@ -1,9 +1,8 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, Book, FileText, TrendingUp, Plus } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserManagement } from "./UserManagement";
-import { useState } from "react";
 
 export const AdminDashboard = () => {
   const stats = [
@@ -13,15 +12,12 @@ export const AdminDashboard = () => {
     { title: "Completion Rate", value: "87%", icon: TrendingUp, color: "from-orange-500 to-orange-600" },
   ];
 
-  // State to manage the current tab and mode for UserManagement
-  const [tab, setTab] = useState<'view' | 'add' | 'report'>('view');
-
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Roshana-Sabaa Admin Dashboard</h1>
-          <p className="text-gray-600 mt-2">Manage your Roshana-Sabaa learning management system</p>
+          <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+          <p className="text-gray-600 mt-2">Manage your learning management system</p>
         </div>
         <div className="flex space-x-3">
           <Button>
@@ -56,7 +52,7 @@ export const AdminDashboard = () => {
           <CardTitle>Quick Actions</CardTitle>
         </CardHeader>
         <CardContent>
-          <Tabs className="w-full">
+          <Tabs defaultValue="users" className="w-full">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="users">User Management</TabsTrigger>
               <TabsTrigger value="courses">Course Management</TabsTrigger>
@@ -64,46 +60,29 @@ export const AdminDashboard = () => {
             </TabsList>
             
             <TabsContent value="users" className="space-y-4">
-              {/* User Management: Add User & View All Users */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* View All Users */}
                 <Card className="p-4 hover:shadow-md transition-shadow cursor-pointer">
                   <div className="text-center">
                     <Users className="w-8 h-8 mx-auto mb-3 text-blue-600" />
                     <h3 className="font-semibold">View All Users</h3>
                     <p className="text-sm text-gray-600">Manage student and instructor accounts</p>
-                    <Button className="mt-2" onClick={() => setTab('view')}>View All Users</Button>
                   </div>
-                </Card>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-                {/* Add New User */}
+                </Card>
                 <Card className="p-4 hover:shadow-md transition-shadow cursor-pointer">
                   <div className="text-center">
                     <Plus className="w-8 h-8 mx-auto mb-3 text-green-600" />
                     <h3 className="font-semibold">Add New User</h3>
                     <p className="text-sm text-gray-600">Create student or instructor account</p>
-                    <Button className="mt-2" onClick={() => setTab('add')}>Add User</Button>
                   </div>
                 </Card>
-                {/* User Reports */}
                 <Card className="p-4 hover:shadow-md transition-shadow cursor-pointer">
                   <div className="text-center">
                     <FileText className="w-8 h-8 mx-auto mb-3 text-purple-600" />
                     <h3 className="font-semibold">User Reports</h3>
                     <p className="text-sm text-gray-600">Generate user activity reports</p>
-                    <Button className="mt-2" onClick={() => setTab('report')}>User Reports</Button>
                   </div>
                 </Card>
               </div>
-              {/* Render UserManagement component for Add/View, and placeholder for User Reports */}
-              {tab === 'add' && <UserManagement />}
-              {tab === 'view' && <UserManagement />}
-              {tab === 'report' && (
-                <Card className="mt-4 p-6 text-center">
-                  <h3 className="font-semibold text-lg mb-2">User Reports</h3>
-                  <p className="text-gray-600 mb-4">(User activity reports functionality coming soon.)</p>
-                  {/* Implement user report logic here as needed */}
-                </Card>
-              )}
             </TabsContent>
             
             <TabsContent value="courses" className="space-y-4">
