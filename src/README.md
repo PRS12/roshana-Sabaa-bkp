@@ -8,11 +8,9 @@
 
 There are several ways of editing your application.
 
-**Use Lovable**
 
-Simply visit the [Roshana-SabaaProject](https://lovable.dev/projects/1aff8c29-a56d-4d46-a5c4-34b31ee2ffa1) and start prompting.
 
-Changes made via Roshana-Sabaawill be committed automatically to this repo.
+Changes made via Roshana-Sabaa will be committed automatically to this repo.
 
 **Use your preferred IDE**
 
