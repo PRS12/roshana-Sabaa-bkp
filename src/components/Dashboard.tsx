@@ -6,14 +6,14 @@ import { Progress } from "@/components/ui/progress";
 
 export const Dashboard = () => {
   const recentCourses = [
-    { id: 1, title: "React Development", progress: 75, instructor: "John Doe" },
-    { id: 2, title: "JavaScript Fundamentals", progress: 90, instructor: "Jane Smith" },
-    { id: 3, title: "UI/UX Design", progress: 45, instructor: "Mike Johnson" },
+    { id: 1, title: "Maths for Beginners", progress: 75, instructor: "John Doe" },
+    { id: 2, title: "Physics Fundamentals", progress: 90, instructor: "Jane Smith" },
+    { id: 3, title: "Economics 101", progress: 45, instructor: "Mike Johnson" },
   ];
-
+``
   const assignments = [
-    { id: 1, title: "React Component Assignment", course: "React Development", dueDate: "2024-01-15", status: "pending" },
-    { id: 2, title: "JavaScript Quiz", course: "JavaScript Fundamentals", dueDate: "2024-01-12", status: "submitted" },
+    { id: 1, title: "Economics Quiz", course: "Economics Fundamentals", dueDate: "2025-08-15", status: "pending" },
+    { id: 2, title: "Maths Assignment", course: "Maths Addition and Subtraction", dueDate: "2025-06-12", status: "submitted" },
   ];
 
   return (
