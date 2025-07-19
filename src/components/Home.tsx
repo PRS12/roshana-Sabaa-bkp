@@ -1,12 +1,52 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Users, ClipboardList, ChevronRight } from "lucide-react";
+import { BookOpen, Users, ClipboardList, ChevronRight, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from '@/integrations/supabase/client';
 
 export const Home = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [userRole, setUserRole] = useState<string>('user');
+  const [loading, setLoading] = useState(true);
 
-  const quickLinks = [
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        setLoading(true);
+        if (user?.id) {
+          console.log('Fetching role for user:', user.id);
+          const { data, error } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', user.id)
+            .single();
+          
+          if (error) {
+            console.error('Error fetching user role:', error);
+            return;
+          }
+          
+          if (data) {
+            console.log('User role data:', data);
+            const role = data.role?.toLowerCase() || 'user';
+            console.log('Setting user role to:', role);
+            setUserRole(role);
+          }
+        }
+      } catch (error) {
+        console.error('Error in fetchUserRole:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserRole();
+  }, [user?.id]);
+
+  const studentQuickLinks = [
     {
       title: "Browse Courses",
       description: "Explore our wide range of courses designed to enhance your learning journey.",
@@ -26,6 +66,29 @@ export const Home = () => {
       path: "/dashboard",
     },
   ];
+
+  const adminQuickLinks = [
+    {
+      title: "Dashboard",
+      description: "Access your administrative dashboard to manage the platform.",
+      icon: <User className="h-6 w-6" />,
+      path: "/admin",
+    },
+    {
+      title: "Manage Users",
+      description: "Add, modify, or remove user accounts and manage permissions.",
+      icon: <Users className="h-6 w-6" />,
+      path: "/admin/users",
+    },
+    {
+      title: "Manage Courses",
+      description: "Create and manage courses, content, and enrollments.",
+      icon: <BookOpen className="h-6 w-6" />,
+      path: "/admin/courses",
+    },
+  ];
+
+  const quickLinks = !loading && userRole === 'admin' ? adminQuickLinks : studentQuickLinks;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
@@ -96,30 +159,71 @@ export const Home = () => {
       <section className="mt-12">
         <Card>
           <CardContent className="p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Getting Started</h2>
-            <div className="space-y-4">
-              <p className="text-gray-600">
-                Here are some tips to help you make the most of Roshana Saba:
-              </p>
-              <ol className="list-decimal list-inside space-y-3 text-gray-600 ml-4">
-                <li>
-                  <span className="font-medium text-gray-900">Explore Courses:</span>{" "}
-                  Browse through our course catalog and enroll in courses that match your interests
-                </li>
-                <li>
-                  <span className="font-medium text-gray-900">Track Progress:</span>{" "}
-                  Use the dashboard to monitor your progress and upcoming assignments
-                </li>
-                <li>
-                  <span className="font-medium text-gray-900">Stay Connected:</span>{" "}
-                  Engage with instructors and fellow students through our community features
-                </li>
-                <li>
-                  <span className="font-medium text-gray-900">Submit Assignments:</span>{" "}
-                  Keep track of deadlines and submit your assignments through the assignments page
-                </li>
-              </ol>
-            </div>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              Getting Started {loading ? '(Loading...)' : `(${userRole})`}
+            </h2>
+            {!loading && userRole === 'admin' ? (
+              <div className="space-y-4">
+                <p className="text-gray-600">
+                  Welcome, Administrator! Here's how you can manage the platform effectively:
+                </p>
+                <ol className="list-decimal list-inside space-y-3 text-gray-600 ml-4">
+                  <li>
+                    <span className="font-medium text-gray-900">User Management:</span>{" "}
+                    Add, modify, or remove user accounts and manage their roles and permissions
+                  </li>
+                  <li>
+                    <span className="font-medium text-gray-900">Course Administration:</span>{" "}
+                    Create new courses, update content, and manage course enrollments
+                  </li>
+                  <li>
+                    <span className="font-medium text-gray-900">Monitor Progress:</span>{" "}
+                    Track student engagement, course completion rates, and overall platform usage
+                  </li>
+                  <li>
+                    <span className="font-medium text-gray-900">System Settings:</span>{" "}
+                    Configure platform settings, manage notifications, and maintain system performance
+                  </li>
+                  <li>
+                    <span className="font-medium text-gray-900">Support & Communication:</span>{" "}
+                    Respond to user inquiries and send platform-wide announcements
+                  </li>
+                </ol>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <p className="text-gray-600">
+                  Welcome to your learning journey! Here's how to get the most out of Roshana Saba:
+                </p>
+                <ol className="list-decimal list-inside space-y-3 text-gray-600 ml-4">
+                  <li>
+                    <span className="font-medium text-gray-900">Profile Setup:</span>{" "}
+                    Complete your profile to personalize your learning experience
+                  </li>
+                  <li>
+                    <span className="font-medium text-gray-900">Course Enrollment:</span>{" "}
+                    Browse and enroll in courses that align with your learning goals
+                  </li>
+                  <li>
+                    <span className="font-medium text-gray-900">Track Learning:</span>{" "}
+                    Monitor your progress through the dashboard and stay on top of deadlines
+                  </li>
+                  <li>
+                    <span className="font-medium text-gray-900">Assignments:</span>{" "}
+                    Submit your work on time and receive feedback from instructors
+                  </li>
+                  <li>
+                    <span className="font-medium text-gray-900">Collaborate:</span>{" "}
+                    Participate in discussions and connect with fellow learners
+                  </li>
+                </ol>
+                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                  <p className="text-blue-800 text-sm">
+                    💡 Pro Tip: Set up notifications to stay updated with course announcements and assignment deadlines!
+                  </p>
+                </div>
+              </div>
+            )}
           </CardContent>
         </Card>
       </section>

@@ -7,6 +7,7 @@ import {
   FileText, 
   ChevronLeft, 
   ChevronRight,
+  Home,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -79,12 +80,14 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
   }
 
   const studentLinks = [
+    { to: "/", icon: Home, label: "Home" },
     { to: "/dashboard", icon: User, label: "Dashboard" },
     { to: "/courses", icon: Book, label: "My Courses" },
     { to: "/assignments", icon: FileText, label: "Assignments" },
   ];
 
   const adminLinks = [
+    { to: "/", icon: Home, label: "Home" },
     { to: "/admin", icon: User, label: "Dashboard" },
     { to: "/admin/users", icon: Users, label: "Manage Users" },
     { to: "/admin/courses", icon: Book, label: "Manage Courses" },
