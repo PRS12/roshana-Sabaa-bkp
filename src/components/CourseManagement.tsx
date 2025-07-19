@@ -14,18 +14,18 @@ export const CourseManagement = () => {
   const courses = [
     {
       id: 1,
-      title: "React Development",
-      instructor: "John Doe",
+      title: "Maths for Beginners",
+      instructor: "Shanti Nelapu",
       students: 45,
       lessons: 12,
       status: "active",
-      category: "Programming",
+      category: "Science",
       duration: "8 weeks"
     },
     {
       id: 2,
-      title: "JavaScript Fundamentals",
-      instructor: "Jane Smith",
+      title: "Programming Fundamentals",
+      instructor: "Shanti Nelapu",
       students: 67,
       lessons: 15,
       status: "active",
@@ -34,22 +34,22 @@ export const CourseManagement = () => {
     },
     {
       id: 3,
-      title: "UI/UX Design Principles",
-      instructor: "Mike Johnson",
+      title: "Physics for everyone",
+      instructor: "Prabhav Sharma",
       students: 23,
       lessons: 10,
       status: "draft",
-      category: "Design",
+      category: "Science",
       duration: "4 weeks"
     },
     {
       id: 4,
-      title: "Database Management",
-      instructor: "Sarah Wilson",
+      title: "Economics 101",
+      instructor: "Prabhav Sharma",
       students: 34,
       lessons: 18,
       status: "active",
-      category: "Database",
+      category: "Arts",
       duration: "10 weeks"
     },
   ];

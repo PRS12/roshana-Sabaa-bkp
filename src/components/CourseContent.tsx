@@ -47,19 +47,19 @@ export const CourseContent = () => {
     },
     {
       id: 2,
-      title: "React Hooks Explained",
+      title: "Maths Simplification for Kids",
       type: "audio",
       duration: "12:45",
-      description: "Understanding useState and useEffect hooks",
+      description: "Understanding Addition and Subtraction",
       url: "#",
       tags: [2, 3, 4]
-    },
+    },  
     {
       id: 3,
-      title: "React Best Practices Guide",
+      title: "Maths Excercise for Kids",
       type: "pdf",
       pages: 25,
-      description: "Comprehensive guide to React development patterns",
+      description: "Comprehensive guide to Addition and Subtraction",
       url: "#",
       tags: [2, 3, 4, 5]
     },
@@ -82,8 +82,8 @@ export const CourseContent = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">React Development Course</h1>
-        <p className="text-gray-600 mt-2">Master React from fundamentals to advanced concepts</p>
+        <h1 className="text-3xl font-bold text-gray-900">Master the Mathematics</h1>
+        <p className="text-gray-600 mt-2">Master Fundamentals and Advance couress</p>
         
         {/* Course Tags Section */}
         <div className="mt-4 flex flex-wrap gap-2">

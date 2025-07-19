@@ -10,6 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -17,9 +19,31 @@ interface HeaderProps {
 
 export const Header = ({ onMenuClick }: HeaderProps) => {
   const { user, signOut } = useAuth();
-
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  
   const handleSignOut = async () => {
-    await signOut();
+    const { error } = await signOut();
+    if (error) {
+      toast({
+        title: "Error signing out",
+        description: "There was a problem signing out. Please try again.",
+        variant: "destructive",
+      });
+      console.error('Sign out error:', error);
+      return;
+    }
+    
+    // Clear any remaining auth data
+    window.localStorage.clear();
+    
+    // Navigate immediately
+    navigate('/auth', { replace: true });
+    
+    toast({
+      title: "Signed out successfully",
+      description: "You have been logged out of your account.",
+    });
   };
 
   return (
