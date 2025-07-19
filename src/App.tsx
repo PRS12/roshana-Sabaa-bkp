@@ -15,6 +15,7 @@ import { AdminDashboard } from "./components/AdminDashboard";
 import { UserManagement } from "./components/UserManagement";
 import { CourseManagement } from "./components/CourseManagement";
 import NotFound from "./pages/NotFound";
+import { Home } from "./components/Home"; 
 
 const queryClient = new QueryClient();
 
@@ -32,7 +33,8 @@ const App = () => (
                 <Layout />
               </ProtectedRoute>
             }>
-              <Route index element={<Dashboard />} />
+              <Route index element={<Home />} />
+              <Route path="dashboard" element={<Dashboard />} />
               <Route path="courses" element={<CourseContent />} />
               <Route path="assignments" element={<AssignmentSubmission />} />
               <Route path="admin" element={<AdminDashboard />} />

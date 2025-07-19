@@ -23,7 +23,7 @@ import { useEffect, useState } from 'react';
 
 export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
   const { user } = useAuth();
-  const [userRole, setUserRole] = useState<string>('student');
+  const [userRole, setUserRole] = useState<string> ('User');
   const isAuthenticated = !!user;
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
           .single();
         
         if (!error && data) {
-          setUserRole(data.role || 'student');
+          setUserRole(data.role || 'User');
         }
       }
     };
@@ -79,11 +79,13 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
   }
 
   const studentLinks = [
+    { to: "/dashboard", icon: User, label: "Dashboard" },
     { to: "/courses", icon: Book, label: "My Courses" },
     { to: "/assignments", icon: FileText, label: "Assignments" },
   ];
 
   const adminLinks = [
+    { to: "/admin", icon: User, label: "Dashboard" },
     { to: "/admin/users", icon: Users, label: "Manage Users" },
     { to: "/admin/courses", icon: Book, label: "Manage Courses" },
   ];
