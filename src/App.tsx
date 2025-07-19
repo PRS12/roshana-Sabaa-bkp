@@ -35,9 +35,9 @@ const App = () => (
               <Route index element={<Dashboard />} />
               <Route path="courses" element={<CourseContent />} />
               <Route path="assignments" element={<AssignmentSubmission />} />
-              {/* <Route path="admin" element={<AdminDashboard />} />
+              <Route path="admin" element={<AdminDashboard />} />
               <Route path="admin/users" element={<UserManagement />} />
-              <Route path="admin/courses" element={<CourseManagement />} /> */}
+              <Route path="admin/courses" element={<CourseManagement />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

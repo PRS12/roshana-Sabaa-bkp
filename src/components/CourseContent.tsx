@@ -1,20 +1,49 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Video, FileAudio, FileText, Play, Download, Book } from "lucide-react";
+import { Video, FileAudio, FileText, Play, Download, Book, Tag } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+
+interface CourseTag {
+  id: number;
+  name: string;
+  color: string;
+}
+
+interface ContentItem {
+  id: number;
+  title: string;
+  type: 'video' | 'audio' | 'pdf';
+  duration?: string;
+  pages?: number;
+  description: string;
+  url: string;
+  tags: number[];
+}
 
 export const CourseContent = () => {
-  const [selectedContent, setSelectedContent] = useState<any>(null);
+  const [selectedContent, setSelectedContent] = useState<ContentItem | null>(null);
 
-  const contentItems = [
+  // Course tags data
+  const courseTags: CourseTag[] = [
+    { id: 1, name: "Beginner", color: "bg-green-100 text-green-800" },
+    { id: 2, name: "Programming", color: "bg-blue-100 text-blue-800" },
+    { id: 3, name: "Web Development", color: "bg-purple-100 text-purple-800" },
+    { id: 4, name: "React", color: "bg-cyan-100 text-cyan-800" },
+    { id: 5, name: "Frontend", color: "bg-pink-100 text-pink-800" },
+  ];
+
+  // Content items with tags
+  const contentItems: ContentItem[] = [
     {
       id: 1,
       title: "Basic Simplification for Kids",
       type: "video",
       duration: "08:30",
       description: "Basic Simplification problem for Kids",
-      url: "https://www.youtube.com/watch?v=Dce12tIG2zc"
+      url: "https://www.youtube.com/watch?v=Dce12tIG2zc",
+      tags: [1, 4] // References to tag IDs
     },
     {
       id: 2,
@@ -22,7 +51,8 @@ export const CourseContent = () => {
       type: "audio",
       duration: "12:45",
       description: "Understanding useState and useEffect hooks",
-      url: "#"
+      url: "#",
+      tags: [2, 3, 4]
     },
     {
       id: 3,
@@ -30,7 +60,8 @@ export const CourseContent = () => {
       type: "pdf",
       pages: 25,
       description: "Comprehensive guide to React development patterns",
-      url: "#"
+      url: "#",
+      tags: [2, 3, 4, 5]
     },
   ];
 
@@ -43,11 +74,29 @@ export const CourseContent = () => {
     }
   };
 
+  // Helper function to get tags for a content item
+  const getContentTags = (tagIds: number[]) => {
+    return courseTags.filter(tag => tagIds.includes(tag.id));
+  };
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">React Development Course</h1>
         <p className="text-gray-600 mt-2">Master React from fundamentals to advanced concepts</p>
+        
+        {/* Course Tags Section */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          {courseTags.map((tag) => (
+            <Badge 
+              key={tag.id} 
+              className={`${tag.color} hover:${tag.color} cursor-pointer transition-all`}
+            >
+              <Tag className="w-3 h-3 mr-1" />
+              {tag.name}
+            </Badge>
+          ))}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -73,6 +122,18 @@ export const CourseContent = () => {
                         <p className="text-sm text-gray-600">
                           {item.type === 'pdf' ? `${item.pages} pages` : item.duration}
                         </p>
+                        {/* Display tags for each content item */}
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {getContentTags(item.tags).map((tag) => (
+                            <Badge 
+                              key={tag.id} 
+                              variant="secondary"
+                              className={`${tag.color} text-xs`}
+                            >
+                              {tag.name}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
                       {selectedContent?.id === item.id && (
                         <Play className="w-4 h-4 text-blue-600" />
